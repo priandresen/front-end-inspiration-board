@@ -1,5 +1,14 @@
 import { useState } from 'react'
 import './App.css'
+import CardList from './components/CardList';
+
+const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
+
+//getAllBoardsAPi
+//convertFromAPI
+//onRemoveCardAPI
+//onLikeCardAPI
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -14,7 +23,8 @@ function App() {
           <p>board</p>
         </div>
         <div>
-          <p>card</p>
+          <CardList
+          />
         </div>
       </main>
     </div>
