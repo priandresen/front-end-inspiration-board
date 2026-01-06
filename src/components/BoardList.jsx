@@ -17,7 +17,6 @@ const BoardList = ({ boards,  onSelectBoard, onDeleteCard, onLikeCard, cardsByBo
             name={board.name}
             cards={cardsByBoard[board.id]}
             onDeleteCard={onDeleteCard}
-            onLikeCard={onLikeCard}
         />
         </li>
         );
