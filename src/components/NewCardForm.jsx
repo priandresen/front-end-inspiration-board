@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const NewCardForm = () => {
+const NewCardForm = ({ onHandleSubmit }) => {
     const [formFields, setFormFields] = useState({
         message: "",
     });
@@ -12,9 +12,17 @@ const NewCardForm = () => {
         });
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        onHandleSubmit(formFields);
+        setFormFields({
+            message: "",
+        });
+    };
+
 
     return (
-        <form className="newCardForm">
+        <form className="newCardForm" onSubmit={handleSubmit}>
             <h2>Create New Card</h2>
             <section>
                 <label htmlFor="cardMessage">Card Message:</label>
