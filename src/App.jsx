@@ -92,7 +92,8 @@ function App() {
 
 
   //setSelectedBoard
-  //
+  //selectedBoard
+
 
   const getAllBoards = () => {
     return getAllBoardsAPI()
@@ -112,7 +113,6 @@ function App() {
       setBoards((boards) => boards.cards.filter((card) => card.id !== id));
     });
   };
-
   
   const onHandleSubmit = (formData) => {
   return addCardAPI(formData).then((createdCard) => {
@@ -120,7 +120,6 @@ function App() {
   });
   };
   
-
   return (
     <div className="App">
       <header className="App-header">
@@ -143,9 +142,6 @@ function App() {
           onHandleSubmit={onHandleSubmit}>
           <NewCardForm
           onHandleSubmit={onHandleSubmit}>
-        </div>
-        <div>
-          {/* <CardList/> */}
         </div>
       </main>
     </div>
