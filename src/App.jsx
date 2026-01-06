@@ -1,14 +1,9 @@
 import { useState } from 'react'
 import './App.css'
 import CardList from './components/CardList';
-<<<<<<< HEAD
 
 const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
 
-=======
-
-const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
->>>>>>> 28d4a8a9d6e8d2a267e8c69325d5409278e4e5f8
 
 //getAllBoardsAPi
 const getAllBoardsAPI = () => {
@@ -101,7 +96,8 @@ function App() {
 
 
   //setSelectedBoard
-  //
+  //selectedBoard
+
 
   const getAllBoards = () => {
     return getAllBoardsAPI()
@@ -121,7 +117,6 @@ function App() {
       setBoards((boards) => boards.cards.filter((card) => card.id !== id));
     });
   };
-
   
   const onHandleSubmit = (formData) => {
   return addCardAPI(formData).then((createdCard) => {
@@ -153,9 +148,6 @@ function App() {
           onHandleSubmit={onHandleSubmit}>
           <NewCardForm
           onHandleSubmit={onHandleSubmit}>
-        </div>
-        <div>
-          {/* <CardList/> */}
         </div>
       </main>
     </div>

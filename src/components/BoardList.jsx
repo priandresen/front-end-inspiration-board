@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Board from './Board.jsx';
 import './BoardList.css';
 
-const BoardList = ({ boards,  onSelectBoard, onDeleteCard, onLikeCard, cardsByBoard }) => {
+const BoardList = ({ boards, onSelectBoard }) => {
 
     const getBoardListJSX = (boards) => {
     return boards.map((board) => {
@@ -15,8 +15,6 @@ const BoardList = ({ boards,  onSelectBoard, onDeleteCard, onLikeCard, cardsByBo
         <Board
             id={board.id}
             name={board.name}
-            cards={cardsByBoard[board.id]}
-            onDeleteCard={onDeleteCard}
         />
         </li>
         );
