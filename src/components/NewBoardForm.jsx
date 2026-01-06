@@ -1,35 +1,61 @@
-import { UseState } from "react";
+import { useState } from "react";
 
-const NewBoardForm = () => {
-    const [formFields, setFormFields] = useState({
+const kDefaultFormState = {
     title: "",
-    author: "",
-  });
+    owner: "",
+};
 
-  const handleTitleChange = (event) => {
-    setFormFields({
-      ...formFields,
-      title: event.target.value,
+
+const NewBoardForm = ({onHandleSubmit}) => {
+  const [formData, setFormData] = useState(kDefaultFormState);
+
+  const handleChange = (event) => {
+    setFormData({
+    ...formData,
+    [event.target.name]: event.target.value,
+    });
+};
+
+const handleSubmit = (event) => {
+    event.preventDefault();
+    onHandleSubmit(formData)
+    .then(() => {
+      setFormData(kDefaultFormState);
     });
   };
 
-  const handleAuthorChange = (event) => {
-    setFormFields({
-      ...formFields,
-      author: event.target.value,
-    });
-  };
+  const makeControlledInput = (name) => {
+    return <input type="text" 
+		id={`-input-${name}`} 
+		name={name}
+		value={formData[name]}
+		onChange={handleChange} required />;
+	};
+
+//   const handleTitleChange = (event) => {
+//     setFormData({
+//       ...formData,
+//       title: event.target.value,
+//     });
+//   };
+
+//   const handleOwnerChange = (event) => {
+//     setFormData({
+//       ...formData,
+//       owner: event.target.value,
+//     });
+//   };
 
 return (
-    <form className="new-board-form">
+    <form onSubmit={handleSubmit} className="new-board-form">
       <h2>Create New Board</h2>
       <section>
         <label htmlFor="boardTitle">Title:</label>
-        <input type="text" id="boardTitle" name="boardTitle" value={formFields.title} onChange={handleTitleChange} required />
+        {makeControlledInput("title")}
       </section>
       <section>
-        <label htmlFor="authorName">Author Name:</label>
-        <input type="text" id="authorName" name="authorName" value={formFields.author} onChange={handleAuthorChange} required />
+        <label htmlFor="ownerName">Owner Name:</label>
+        {makeControlledInput("owner")}
       </section>
       <button type="submit" value="Add Board">Create Board</button>
     </form>
