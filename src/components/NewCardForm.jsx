@@ -1,16 +1,26 @@
+import { useState } from "react";
+
 const NewCardForm = () => {
+    const [formFields, setFormFields] = useState({
+        message: "",
+    });
+
+    const handleMessageChange = (event) => {
+        setFormFields({
+            ...formFields,
+            message: event.target.value,
+        });
+    };
+
+
     return (
-        <form className="new-card-form">
+        <form className="newCardForm">
             <h2>Create New Card</h2>
-            <div className="form-group">
-                <label htmlFor="card-title">Card Title:</label>
-                <input type="text" id="card-title" name="card-title" required />
-            </div>
-            <div className="form-group">
-                <label htmlFor="card-description">Card Description:</label>
-                <textarea id="card-description" name="card-description"></textarea>
-            </div>
-            <button type="submit">Create Card</button>
+            <section>
+                <label htmlFor="cardMessage">Card Message:</label>
+                <input type="text" id="cardMessage" name="cardMessage" value={formFields.message} onChange={handleMessageChange} required />
+            </section>
+            <button type="submit" value="Add card">Create Card</button>
         </form>
     );
 };
