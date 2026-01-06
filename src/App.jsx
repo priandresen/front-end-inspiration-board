@@ -1,8 +1,8 @@
-import { useState } from 'react'
+// import { useState } from 'react'
 import './App.css'
-import CardList from './components/CardList';
+// import CardList from './components/CardList';
 
-const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
+// const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
 
 //getAllBoardsAPi
 //convertFromAPI
@@ -11,7 +11,6 @@ const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
@@ -23,8 +22,7 @@ function App() {
           <p>board</p>
         </div>
         <div>
-          <CardList
-          />
+          {/* <CardList/> */}
         </div>
       </main>
     </div>
