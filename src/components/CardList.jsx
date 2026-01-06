@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
 import Card from './Card.jsx';
-import './CardList.css';
+// import './CardList.css';
 
 const CardList = ({ cards, boardId, onDeleteCard, onLikeCard }) => {
-  
   const getCardListJSX = (cards) => {
     return cards.map((card) => {
       return (

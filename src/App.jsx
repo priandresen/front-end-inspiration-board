@@ -1,4 +1,9 @@
 import { useState } from 'react'
+import { useEffect } from 'react'
+import axios from 'axios'
+import BoardList from './components/BoardList.jsx'
+import NewBoardForm from './components/NewBoardForm.jsx'
+import NewCardForm from './components/NewCardForm.jsx'
 import './App.css'
 import CardList from './components/CardList';
 
@@ -100,6 +105,9 @@ function App() {
   //selectedBoard
 
   const onSelectBoard = (boardId) => {
+    const board = boards.find((b) => b.id === boardId);
+    setSelectedBoard(board);
+  };
 
 
   const getAllBoards = () => {
@@ -121,12 +129,38 @@ function App() {
     });
   };
   
-  const onHandleSubmit = (formData) => {
-  return addCardAPI(formData).then((createdCard) => {
-    return setCardData((prev) => [convertCardToAPI(createdCard), ...prev]); 
-  });
+  const onHandleSubmitCard = (newCard) => {
+    return axios.post(`${kbaseURL}/cards`, convertCardToAPI(newCard))
+    .then((response) => {
+      setSelectedBoard((selectedBoard) => ({ 
+        ...selectedBoard, 
+        cards: [...selectedBoard.cards, convertFromAPI(response.data)]
+      }));
+    })
+    .catch((error) => console.error(error));
   };
   
+  const onHandleSubmitBoard = (newBoard) => {
+    return axios.post(`${kbaseURL}/boards`, newBoard)
+    .then((response) => {
+      setBoards((boards) => [...boards, convertFromAPI(response.data)]);
+    })
+    .catch((error) => console.error(error));
+  };  
+  
+  const onLikeCard = (boardId, cardId) => {
+    onLikeCardAPI(cardId).then(() => {
+      setSelectedBoard((selectedBoard) => {
+        const updatedCards = selectedBoard.cards.map((card) => {
+          if (card.id === cardId) {
+            return { ...card, likesCount: card.likesCount + 1 };
+          }
+          return card;
+        });
+        return { ...selectedBoard, cards: updatedCards };
+      });
+    });
+  };
 
   return (
     <div className="App">
@@ -135,24 +169,24 @@ function App() {
       </header>
       <main>
         <div>
-          <BoardList> 
+          <BoardList
             boards={boards}
             onSelect={onSelectBoard}
             onDeleteCard={onDeleteCard}          
-          </BoardList>
-          <CardList>
-            cards={selectedBoard.cards}
-            boardId={selectedBoard.id}
+          />
+          <CardList
+            cards={selectedBoard ? selectedBoard.cards : []}
+            boardId={selectedBoard ? selectedBoard.id : null}
             onDeleteCard={onDeleteCard}
             onLikeCard={onLikeCard}
-          </CardList>
+          />
 
-          <NewBoardForm>
-            onHandleSubmit={onHandleSubmit}
-          </NewBoardForm>
-          <NewCardForm>
-            onHandleSubmit={onHandleSubmit}
-          </NewCardForm>
+          <NewBoardForm
+            onHandleSubmit={onHandleSubmitBoard}
+          />
+          <NewCardForm
+            onHandleSubmit={onHandleSubmitCard}
+          />
 
         </div>
       </main>
@@ -160,4 +194,4 @@ function App() {
   );
 };
 
-export default App
+export default App;
