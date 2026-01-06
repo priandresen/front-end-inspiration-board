@@ -29,7 +29,7 @@ const convertFromAPI = (apiCard) => {
 //onRemoveCardAPI
 const onRemoveCardAPI = (id) => {
   return axios
-  .delete(`${kbaseURL}`/cards/`${id}`)
+  .delete(`${kbaseURL}/cards/${id}`)
   .catch((error) => console.error(error));
 };
 
@@ -37,7 +37,7 @@ const onRemoveCardAPI = (id) => {
 //onRemoveBoardAPI
 const onRemoveBoardAPI = (id) => {
   return axios
-  .delete(`${kbaseURL}`/boards/`${id}`)
+  .delete(`${kbaseURL}/boards/${id}`)
   .catch((error) => console.error(error));
 };
 
@@ -45,10 +45,12 @@ const onRemoveBoardAPI = (id) => {
 //onLikeCardAPI
 //postCardAPI
 //getallboards
+
+
 //getcardsforboard
 const onLikeCardAPI = (id) => {
   return axios
-  .patch(`${kbaseURL}`/cards/`${id}/like`)
+  .patch(`${kbaseURL}/cards/${id}/like`)
   .catch((error) => console.error(error));
 }
 
@@ -94,9 +96,10 @@ function App() {
   const [selectedBoard, setSelectedBoard] = useState(null);
 
 
-
   //setSelectedBoard
   //selectedBoard
+
+  const onSelectBoard = (boardId) => {
 
 
   const getAllBoards = () => {
@@ -125,7 +128,6 @@ function App() {
   };
   
 
-
   return (
     <div className="App">
       <header className="App-header">
@@ -133,21 +135,25 @@ function App() {
       </header>
       <main>
         <div>
-          <BoardList
-          boards={boards}
-          onSelect={onSelect}
-          onDeleteCard={onDeleteCard}          
-          >
-          <CardList
-          cards={selectedBoard.cards}
-          boardId={selectedBoard.id}
-          onDeleteCard={onDeleteCard}
-          onLikeCard={onLikeCard}
-          >
-          <NewBoardForm 
-          onHandleSubmit={onHandleSubmit}>
-          <NewCardForm
-          onHandleSubmit={onHandleSubmit}>
+          <BoardList> 
+            boards={boards}
+            onSelect={onSelectBoard}
+            onDeleteCard={onDeleteCard}          
+          </BoardList>
+          <CardList>
+            cards={selectedBoard.cards}
+            boardId={selectedBoard.id}
+            onDeleteCard={onDeleteCard}
+            onLikeCard={onLikeCard}
+          </CardList>
+
+          <NewBoardForm>
+            onHandleSubmit={onHandleSubmit}
+          </NewBoardForm>
+          <NewCardForm>
+            onHandleSubmit={onHandleSubmit}
+          </NewCardForm>
+
         </div>
       </main>
     </div>
