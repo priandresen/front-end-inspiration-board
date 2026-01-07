@@ -8,28 +8,47 @@ const kDefaultFormState = {
 
 const NewBoardForm = ({ onHandleSubmit }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
+  const [error, setError] = useState("");
 
   const handleChange = (event) => {
     setFormData({
     ...formData,
     [event.target.name]: event.target.value,
     });
+    setError("");
 };
 
 const handleSubmit = (event) => {
     event.preventDefault();
-    onHandleSubmit(formData)
-    .then(() => {
-      setFormData(kDefaultFormState);
-    });
+    
+    const payload = {
+      title: formData.title.trim(),
+      owner: formData.owner.trim(),
+    };
+
+    if (!payload.title || !payload.owner) {
+      setError("Title and owner are required.");
+      return;
+    }
+
+    return onHandleSubmit(payload)
+      .then(() => {
+        setFormData(kDefaultFormState);
+        setError("");
+      })
+      .catch((err) => {
+        const details = err?.response?.data?.details;
+        setError(details || "Could not create board.");
+      });
   };
 
   const makeControlledInput = (name) => {
     return <input type="text" 
-		id={`-input-${name}`} 
+		id={`input-${name}`} 
 		name={name}
 		value={formData[name]}
-		onChange={handleChange} required />;
+		onChange={handleChange} required 
+    className={error ? "input-error" : ""}/>;
 	};
 
 //   const handleTitleChange = (event) => {
@@ -50,14 +69,17 @@ return (
     <form onSubmit={handleSubmit} className="new-board-form">
       <h2>Create New Board</h2>
       <section>
-        <label htmlFor="boardTitle">Title:</label>
+        <label htmlFor="input-title">Title:</label>
         {makeControlledInput("title")}
       </section>
       <section>
-        <label htmlFor="ownerName">Owner Name:</label>
+        <label htmlFor="input-owner">Owner Name:</label>
         {makeControlledInput("owner")}
       </section>
-      <button type="submit" value="Add Board">Create Board</button>
+
+      {error && <p className="error-text">{error}</p>}
+
+      <button type="submit">Create Board</button>
     </form>
   );
 };
