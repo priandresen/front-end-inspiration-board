@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Board from './Board.jsx';
-// import './BoardList.css';
+import './BoardList.css';
 
 const BoardList = ({ boards, onSelectBoard, onDeleteBoard,onDeleteCardsInBoard }) => {
 

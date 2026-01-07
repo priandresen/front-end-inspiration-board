@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Card from './Card.jsx';
-// import './CardList.css';
+import './CardList.css';
 
 const CardList = ({ cards, onDeleteCard, onLikeCard, onDeleteCardsInBoard, boardId }) => {
   const getCardListJSX = (cardList) => {

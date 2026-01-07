@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import './Board.css';
 
 const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard }) => {
 
