@@ -28,7 +28,6 @@ Board.propTypes = {
     owner: PropTypes.string.isRequired,
     onSelectBoard: PropTypes.func.isRequired,
     onDeleteBoard: PropTypes.func.isRequired,
-    onDeleteCardsInBoard: PropTypes.func.isRequired, 
 };
 
 export default Board;

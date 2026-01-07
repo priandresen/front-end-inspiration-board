@@ -41,6 +41,8 @@ CardList.propTypes = {
   ).isRequired,
   onDeleteCard: PropTypes.func.isRequired,
   onLikeCard: PropTypes.func.isRequired,
+	onDeleteCardsInBoard: PropTypes.func.isRequired,
+  boardId: PropTypes.number.isRequired,
 };
 
 export default CardList;
