@@ -15,11 +15,10 @@ const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard }) => {
 
 
     return (
-    <div className="board" >
-        <h2><button onClick={handleClick}>{title}</button></h2>
-        <p>by {owner}</p> 
+    <li className="board" >
+        <button onClick={handleClick}>{title}</button>
         <button onClick={handleDelete}>🗑</button>
-    </div>
+    </li>
     );
 };
 

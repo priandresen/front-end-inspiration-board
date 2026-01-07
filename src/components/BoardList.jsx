@@ -20,9 +20,11 @@ const BoardList = ({ boards, onSelectBoard, onDeleteBoard }) => {
     };
 
     return (
-    <ul className="board-list no-bullet" >
-    {getBoardListJSX(boards)}
-    </ul>
+        <section className="board-list-section">
+            <ul className="board-list no-bullet" >
+            {getBoardListJSX(boards)}
+            </ul>
+        </section>
     );
 };
 
