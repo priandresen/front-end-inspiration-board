@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard,onDeleteCardsInBoard }) => {
+const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard }) => {
 
     const handleClick = () => {
         onSelectBoard(id);
@@ -12,17 +12,12 @@ const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard,onDeleteCardsInB
         console.log(`Board ${id} deleted`);
     };
 
-    const handleDeleteCards = () => {
-        onDeleteCardsInBoard(id); // id is the board id
-        console.log(`All cards for board ${id} deleted`);
-    };
 
     return (
     <div className="board" >
-        <button onClick={handleClick}>{title}</button>
-        by {owner}
-        <button onClick={handleDelete}>delete Emoji</button>
-        <button onClick={handleDeleteCards}>Delete ALL Cards</button>
+        <h2><button onClick={handleClick}>{title}</button></h2>
+        <p>by {owner}</p> 
+        <button onClick={handleDelete}>🗑</button>
     </div>
     );
 };

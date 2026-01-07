@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Card from './Card.jsx';
 // import './CardList.css';
 
-const CardList = ({ cards, onDeleteCard, onLikeCard }) => {
+const CardList = ({ cards, onDeleteCard, onLikeCard, onDeleteCardsInBoard, boardId }) => {
   const getCardListJSX = (cardList) => {
     return cardList.map((card) => {
       return (
@@ -18,9 +18,15 @@ const CardList = ({ cards, onDeleteCard, onLikeCard }) => {
     });
   }
   
+	const handleDeleteCards = () => {
+	    onDeleteCardsInBoard(boardId); // id is the board id
+	    console.log(`All cards for board ${boardId} deleted`);
+	};
+
     return (
     <div className="card-list">
       {getCardListJSX(cards)}
+		<button onClick={handleDeleteCards}>reset board</button>
     </div>
   );
 };

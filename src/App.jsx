@@ -229,7 +229,7 @@ function App() {
             boards={boards}
             onSelectBoard={onSelectBoard}
             onDeleteBoard={onDeleteBoard}     
-            onDeleteCardsInBoard={onDeleteCardsInBoard} />
+           />
             </>
           }
           { selectedBoard && 
@@ -241,6 +241,8 @@ function App() {
               cards={selectedBoard ? cards : []}
               onDeleteCard={onDeleteCard}
               onLikeCard={onLikeCard}
+              onDeleteCardsInBoard={onDeleteCardsInBoard}
+              boardId={selectedBoard.id}
             />
         </div>
             </div>

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 // import './Card.css';
 
-const Card = ({ id, likesCount, message, onDeleteCard, onLikeCard}) => {
+const Card = ({ id, likesCount, message, onDeleteCard, onLikeCard }) => {
 
   const likeButtonClicked = () => {
     onLikeCard(id);
