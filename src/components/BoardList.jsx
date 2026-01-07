@@ -6,18 +6,15 @@ const BoardList = ({ boards, onSelectBoard }) => {
 
     const getBoardListJSX = (boards) => {
     return boards.map((board) => {
-
-    return (
-        <li
-            key={board.id}
-            onClick={() => onSelectBoard(board.id)}
-        >
-        <Board
-            id={board.id}
-            owner={board.owner}
-        />
-        </li>
-        );
+        return (
+            <Board
+                key={board.id}
+                id={board.id}
+                owner={board.owner}
+                onSelect={onSelectBoard}
+            />
+            </li>
+            );
     });
     };
 

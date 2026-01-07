@@ -3,14 +3,21 @@ import PropTypes from 'prop-types';
 
 const Card = ({ id, boardId, likesCount, message, onDeleteCard, onLikeCard}) => {
 
+  const likeButtonClicked = () => {
+    onLikeCard(boardId, id);
+  };
+
+  const deleteButtonClicked = () => {
+    onDeleteCard(boardId, id);
+  };
 
   return (
     <div className="card">
       <p>{message}</p>
       <li>
           {likesCount}
-          <button onClick={() => onLikeCard(boardId, id)}>hearts Emoji</button>
-          <button onClick={() => onDeleteCard(boardId, id)}>delete Emoji</button>
+          <button onClick={likeButtonClicked}>hearts Emoji</button>
+          <button onClick={deleteButtonClicked}>delete Emoji</button>
       </li>
     </div>
 

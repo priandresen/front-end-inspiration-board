@@ -2,12 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardList from './CardList.jsx';
 
-const Board = ({ id, owner }) => {
-    return (
-    <div className="board">
-        <h2>{owner}</h2>
-        <p>Board ID: {id}</p>
+const Board = ({ id, owner, onSelectBoard }) => {
 
+    const handleClick = () => {
+        onSelectBoard(id);
+    };
+
+    return (
+    <div className="board" onClick={handleClick}>
+        <h2>{owner}</h2>
+        {/* <p>Board ID: {id}</p> */}
     </div>
     );
 };
