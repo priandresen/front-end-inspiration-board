@@ -6,6 +6,7 @@ const Board = ({ id, owner, onSelectBoard }) => {
 
     const handleClick = () => {
         onSelectBoard(id);
+        console.log(`Board ${id} selected`);
     };
 
     return (

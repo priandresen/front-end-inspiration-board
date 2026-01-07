@@ -11,9 +11,8 @@ const BoardList = ({ boards, onSelectBoard }) => {
                 key={board.id}
                 id={board.id}
                 owner={board.owner}
-                onSelect={onSelectBoard}
+                onSelectBoard={onSelectBoard}
             />
-            </li>
             );
     });
     };

@@ -60,12 +60,11 @@ const onLikeCardAPI = (id) => {
   .catch((error) => console.error(error));
 }
 
-
 //postCardAPI -----Nadia
-const addCardAPI = (newCard) => {
-  return axios.post(`${kbaseURL}/cards`, newCard)
-    .then(response => response.data);
-};
+// const addCardAPI = (newCard) => {
+//   return axios.post(`${kbaseURL}/cards`, newCard)
+//     .then(response => response.data);
+// };
 
 // //get all cards??
 // const getAllCardsAPI = () => {
@@ -174,21 +173,26 @@ function App() {
             boards={boards}
             onSelect={onSelectBoard}      
           />
+        </div>
+        <div>
           <CardList
             cards={selectedBoard ? selectedBoard.cards : []}
             boardId={selectedBoard ? selectedBoard.id : null}
             onDeleteCard={onDeleteCard}
             onLikeCard={onLikeCard}
           />
+        </div>
+        <div>
 
           <NewBoardForm
             onHandleSubmit={onHandleSubmitBoard}
           />
+        </div>
+        <div>
           <NewCardForm
             onHandleSubmit={onHandleSubmitCard}
           />
-
-        </div>
+          </div>
       </main>
     </div>
   );
