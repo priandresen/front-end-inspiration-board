@@ -174,6 +174,15 @@ function App() {
     })
     .catch((error) => console.error(error));
   };
+
+  const onDeleteCardsInBoard = (boardId) => {
+  return axios
+    .delete(`${kbaseURL}/boards/${boardId}/cards`)
+    .then(() => {
+      setCards([]); // clear frontend state
+    })
+    .catch((error) => console.error(error));
+};
   
   const onHandleSubmitCard = (newCard) => {
     const payload = { 
@@ -218,6 +227,7 @@ function App() {
             boards={boards}
             onSelectBoard={onSelectBoard}
             onDeleteBoard={onDeleteBoard}     
+            onDeleteCardsInBoard={onDeleteCardsInBoard} 
           />
         </div>
         <div>
