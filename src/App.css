@@ -1,12 +1,18 @@
 @font-face {
   font-family: 'cosmic-rockstar';
-  src: url('/Users/prigab/Developer/inspiration-board-project/front-end-inspiration-board/src/fonts/cosmic-rockstar.regular.otf') format('opentype');
+  src: url('./fonts/cosmic-rockstar.regular.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'magic-delight';
-  src: url('src//Users/prigab/Developer/inspiration-board-project/front-end-inspiration-board/src/fonts/magic-delight-demo.regular.otf') format('opentype');
+  src: url('./fonts/magic-delight-demo.regular.otf') format('opentype');
 }
+
+@font-face {
+  font-family: 'cosmic-rockstar-woff';
+  src: url('./fonts/cosmic-rockstar.regular.woff') format('woff2');  
+}
+
 
 h1 {
   font-family: 'cosmic-rockstar';
