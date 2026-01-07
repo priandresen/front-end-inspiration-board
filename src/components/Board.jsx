@@ -2,26 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardList from './CardList.jsx';
 
-const Board = ({ id, name, cards, onDeleteCard, onLikeCard }) => {
+const Board = ({ id, owner }) => {
     return (
     <div className="board">
-        <h2>{name}</h2>
+        <h2>{owner}</h2>
         <p>Board ID: {id}</p>
 
-      {/* Render cards for this board */}
-        <CardList
-        cards={cards}
-        boardId={id}
-        onDeleteCard={onDeleteCard}
-        onLikeCard={onLikeCard}
-        />
     </div>
     );
 };
 
 Board.propTypes = {
     id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
+    owner: PropTypes.string.isRequired,
     cards: PropTypes.arrayOf(
     PropTypes.shape({
         id: PropTypes.number.isRequired,

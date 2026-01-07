@@ -14,7 +14,7 @@ const BoardList = ({ boards, onSelectBoard }) => {
         >
         <Board
             id={board.id}
-            name={board.name}
+            owner={board.owner}
         />
         </li>
         );

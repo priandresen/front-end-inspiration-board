@@ -7,7 +7,8 @@ import NewCardForm from './components/NewCardForm.jsx'
 import './App.css'
 import CardList from './components/CardList';
 
-const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
+// const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
+const kbaseURL = 'http://127.0.0.1:5000';
 
 
 //getAllBoardsAPi
@@ -171,8 +172,7 @@ function App() {
         <div>
           <BoardList
             boards={boards}
-            onSelect={onSelectBoard}
-            onDeleteCard={onDeleteCard}          
+            onSelect={onSelectBoard}      
           />
           <CardList
             cards={selectedBoard ? selectedBoard.cards : []}
