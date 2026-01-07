@@ -30,14 +30,12 @@ BoardList.propTypes = {
     boards: PropTypes.arrayOf(
     PropTypes.shape({
         id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        owner: PropTypes.string.isRequired,
     })
     ).isRequired,
-    selectedBoardId: PropTypes.number,
     onSelectBoard: PropTypes.func.isRequired,
-    onDeleteCard: PropTypes.func.isRequired,
-    onLikeCard: PropTypes.func.isRequired,
-    cardsByBoard: PropTypes.object.isRequired
+    onDeleteBoard: PropTypes.func.isRequired,
 };
 
 export default BoardList;
