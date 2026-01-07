@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'cosmic-rockstar';
-  src: url('src/fonts/cosmic-rockstar.regular.otf') format('opentype');
+  src: url('/Users/prigab/Developer/inspiration-board-project/front-end-inspiration-board/src/fonts/cosmic-rockstar.regular.otf') format('opentype');
 }
 
 @font-face {
   font-family: 'magic-delight';
-  src: url('src/fonts/magic-delight-demo.regular.otf') format('opentype');
+  src: url('src//Users/prigab/Developer/inspiration-board-project/front-end-inspiration-board/src/fonts/magic-delight-demo.regular.otf') format('opentype');
 }
 
 h1 {
