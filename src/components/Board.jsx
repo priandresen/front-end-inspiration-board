@@ -2,18 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardList from './CardList.jsx';
 
-const Board = ({ title, id, owner, onSelectBoard }) => {
+const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard }) => {
 
     const handleClick = () => {
         onSelectBoard(id);
         console.log(`Board ${id} selected`);
     };
 
+    const handleDelete = () => {
+        onDeleteBoard(id);
+        console.log(`Board ${id} deleted`);
+    };
+
     return (
     <div className="board" >
         <button onClick={() => {handleClick()}}>{title}</button>
         by {owner}
-        {/* <p>Board ID: {id}</p> */}
+        <button onClick={() => {handleDelete(id)}}>delete Emoji</button>
     </div>
     );
 };

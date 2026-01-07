@@ -214,7 +214,8 @@ function App() {
         <div>
           <BoardList
             boards={boards}
-            onSelectBoard={onSelectBoard}      
+            onSelectBoard={onSelectBoard}
+            onDeleteBoard={onDeleteBoard}     
           />
         </div>
         <div>

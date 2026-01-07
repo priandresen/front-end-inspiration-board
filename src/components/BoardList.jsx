@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Board from './Board.jsx';
 // import './BoardList.css';
 
-const BoardList = ({ boards, onSelectBoard }) => {
+const BoardList = ({ boards, onSelectBoard, onDeleteBoard }) => {
 
     const getBoardListJSX = (boards) => {
     return boards.map((board) => {
@@ -13,6 +13,7 @@ const BoardList = ({ boards, onSelectBoard }) => {
                 owner={board.owner}
                 title={board.title}
                 onSelectBoard={onSelectBoard}
+                onDeleteBoard={onDeleteBoard}
             />
             );
     });

@@ -6,7 +6,7 @@ const kDefaultFormState = {
 };
 
 
-const NewBoardForm = ({onHandleSubmit}) => {
+const NewBoardForm = ({ onHandleSubmit }) => {
   const [formData, setFormData] = useState(kDefaultFormState);
 
   const handleChange = (event) => {
