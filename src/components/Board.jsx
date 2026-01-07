@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardList from './CardList.jsx';
 
-const Board = ({ id, owner, onSelectBoard }) => {
+const Board = ({ title, id, owner, onSelectBoard }) => {
 
     const handleClick = () => {
         onSelectBoard(id);
@@ -11,7 +11,8 @@ const Board = ({ id, owner, onSelectBoard }) => {
 
     return (
     <div className="board" >
-        <button onClick={() => {handleClick()}}>{owner}</button>
+        <button onClick={() => {handleClick()}}>{title}</button>
+        by {owner}
         {/* <p>Board ID: {id}</p> */}
     </div>
     );

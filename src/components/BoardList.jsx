@@ -11,6 +11,7 @@ const BoardList = ({ boards, onSelectBoard }) => {
                 key={board.id}
                 id={board.id}
                 owner={board.owner}
+                title={board.title}
                 onSelectBoard={onSelectBoard}
             />
             );

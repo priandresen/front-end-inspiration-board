@@ -19,7 +19,7 @@ const getAllBoardsAPI = () => {
 };
 
 //convertFromAPI
-const convertFromAPI = (apiCard) => {
+const convertCardFromAPI = (apiCard) => {
   const newCard = {
     ...apiCard,
     likesCount: apiCard.likes_count,
@@ -28,6 +28,20 @@ const convertFromAPI = (apiCard) => {
 
   delete apiCard.likes_count;
   delete apiCard.board_id;
+
+  return newCard;
+};
+
+//convertToAPI
+const convertCardToAPI = (apiCard) => {
+  const newCard = {
+    ...apiCard,
+    likes_count: apiCard.likesCount,
+    board_id: apiCard.boardId,
+  };
+
+  delete apiCard.likesCount;
+  delete apiCard.boardId;
 
   return newCard;
 };
@@ -81,24 +95,30 @@ const onLikeCardAPI = (id) => {
 //converttapiocard
 
 
-const convertCardToAPI = (newCard) => {
-  return {
-    message: newCard.message,
-    board_id: newCard.boardId,
-  };
-};
+// const convertCardToAPI = (newCard) => {
+//   return {
+//     message: newCard.message,
+//     board_id: newCard.boardId,
+//   };
+// };
 
 //onhandlesubmitnewcard
-const onHandleSubmitNewCard = (id) => {
-  return axios
-  .then 
-}
+// const onHandleSubmitNewCard = (id) => {
+//   return axios
+//   .then 
+// }
 
+const getCardsForBoardAPI = (boardId) => {
+  return axios.get(`${kbaseURL}/boards/${boardId}/cards`)
+  .then(response => response.data.cards)
+  .catch(error => console.error(error))
+};
 
 
 function App() {
   const [boards, setBoards] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState(null);
+  const [cards, setCards] = useState([]);
 
 
   //setSelectedBoard
@@ -107,13 +127,29 @@ function App() {
   const onSelectBoard = (boardId) => {
     const board = boards.find((board) => board.id === boardId);
     setSelectedBoard(board);
+
   };
 
+  const getCardsForBoard = (boardId) => {
+    return getCardsForBoardAPI(boardId)
+    .then((cardsFromAPI) => {
+      const newCards = cardsFromAPI.map(convertCardFromAPI);
+      setCards(newCards);
+    });
+  };
+
+  useEffect(() => {
+    if (selectedBoard) {
+      getCardsForBoard(selectedBoard.id);
+    }
+  }, [selectedBoard]);
 
   const getAllBoards = () => {
     return getAllBoardsAPI()
     .then((boardFromAPI) => {
-      const newBoard = boardFromAPI.map(convertFromAPI);
+      const newBoard = boardFromAPI.map(board => ({
+        ...board,
+      }));
       setBoards(newBoard);
     }); 
     };
@@ -125,17 +161,24 @@ function App() {
     //ondeletecard
   const onDeleteCard = (id) => {
     onRemoveCardAPI(id).then(() => {
-      setBoards((boards) => boards.cards.filter((card) => card.id !== id));
+      setCards((cards) => cards.filter((card) => card.id !== id));
+    });
+  };
+
+  const onDeleteBoard = (id) => {
+    onRemoveBoardAPI(id).then(() => {
+      setBoards((boards) => boards.filter((board) => board.id !== id));
+      if (selectedBoard && selectedBoard.id === id) {
+        setSelectedBoard(null);
+        setCards([]);
+      }
     });
   };
   
   const onHandleSubmitCard = (newCard) => {
     return axios.post(`${kbaseURL}/boards/${selectedBoard.id}/cards/`, convertCardToAPI(newCard))
     .then((response) => {
-      setSelectedBoard((selectedBoard) => ({ 
-        ...selectedBoard, 
-        cards: [...selectedBoard.cards, convertFromAPI(response.data)]
-      }));
+      setCards((cards) => [...cards, convertCardFromAPI(response.data)]);
     })
     .catch((error) => console.error(error));
   };
@@ -143,21 +186,21 @@ function App() {
   const onHandleSubmitBoard = (newBoard) => {
     return axios.post(`${kbaseURL}/boards`, newBoard)
     .then((response) => {
-      setBoards((boards) => [...boards, convertFromAPI(response.data)]);
+      setBoards((boards) => [...boards, response.data]);
     })
     .catch((error) => console.error(error));
-  };  
+  };
   
-  const onLikeCard = (boardId, cardId) => {
+  const onLikeCard = (cardId) => {
     onLikeCardAPI(cardId).then(() => {
-      setSelectedBoard((selectedBoard) => {
-        const updatedCards = selectedBoard.cards.map((card) => {
+      setCards((cards) => {
+        const updatedCards = cards.map((card) => {
           if (card.id === cardId) {
             return { ...card, likesCount: card.likesCount + 1 };
           }
           return card;
         });
-        return { ...selectedBoard, cards: updatedCards };
+        return updatedCards;
       });
     });
   };
@@ -176,7 +219,7 @@ function App() {
         </div>
         <div>
           <CardList
-            cards={selectedBoard ? selectedBoard.cards : []}
+            cards={selectedBoard ? cards : []}
             boardId={selectedBoard ? selectedBoard.id : null}
             onDeleteCard={onDeleteCard}
             onLikeCard={onLikeCard}

@@ -9,8 +9,8 @@ const CardList = ({ cards, boardId, onDeleteCard, onLikeCard }) => {
         <Card
           key={card.id}
           id={card.id}
-          boardId={boardId}
-          likesCount={card.likesCount}
+					boardId={boardId}
+					likesCount={card.likesCount}
           message={card.message}
           onDeleteCard={onDeleteCard}
           onLikeCard={onLikeCard}

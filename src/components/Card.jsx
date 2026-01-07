@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 const Card = ({ id, boardId, likesCount, message, onDeleteCard, onLikeCard}) => {
 
   const likeButtonClicked = () => {
-    onLikeCard(boardId, id);
+    onLikeCard(id);
   };
 
   const deleteButtonClicked = () => {
-    onDeleteCard(boardId, id);
+    onDeleteCard(id);
   };
 
   return (
