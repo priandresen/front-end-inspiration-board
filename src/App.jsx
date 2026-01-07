@@ -7,8 +7,8 @@ import NewCardForm from './components/NewCardForm.jsx'
 import './App.css'
 import CardList from './components/CardList';
 
-// const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
-const kbaseURL = 'http://127.0.0.1:5000';
+const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
+// const kbaseURL = 'http://127.0.0.1:5000';
 
 
 //getAllBoardsAPi
@@ -105,7 +105,7 @@ function App() {
   //selectedBoard
 
   const onSelectBoard = (boardId) => {
-    const board = boards.find((b) => b.id === boardId);
+    const board = boards.find((board) => board.id === boardId);
     setSelectedBoard(board);
   };
 
@@ -130,7 +130,7 @@ function App() {
   };
   
   const onHandleSubmitCard = (newCard) => {
-    return axios.post(`${kbaseURL}/cards`, convertCardToAPI(newCard))
+    return axios.post(`${kbaseURL}/boards/${selectedBoard.id}/cards/`, convertCardToAPI(newCard))
     .then((response) => {
       setSelectedBoard((selectedBoard) => ({ 
         ...selectedBoard, 
@@ -171,7 +171,7 @@ function App() {
         <div>
           <BoardList
             boards={boards}
-            onSelect={onSelectBoard}      
+            onSelectBoard={onSelectBoard}      
           />
         </div>
         <div>
@@ -191,6 +191,7 @@ function App() {
         <div>
           <NewCardForm
             onHandleSubmit={onHandleSubmitCard}
+            boardId={selectedBoard ? selectedBoard.id : null}
           />
           </div>
       </main>

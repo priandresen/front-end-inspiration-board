@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const NewCardForm = ({ onHandleSubmit }) => {
     const [formFields, setFormFields] = useState({
-        message: "",
+        message: ""
     });
 
     const handleMessageChange = (event) => {

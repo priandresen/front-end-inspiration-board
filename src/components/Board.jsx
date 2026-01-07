@@ -10,8 +10,8 @@ const Board = ({ id, owner, onSelectBoard }) => {
     };
 
     return (
-    <div className="board" onClick={handleClick}>
-        <h2>{owner}</h2>
+    <div className="board" >
+        <button onClick={() => {handleClick()}}>{owner}</button>
         {/* <p>Board ID: {id}</p> */}
     </div>
     );
