@@ -31,20 +31,6 @@ const convertCardFromAPI = (apiCard) => {
   return newCard;
 };
 
-//convertToAPI ---It tries to send likes_count based on likesCount, but the client shouldn’t send likes
-// const convertCardToAPI = (apiCard) => {
-//   const newCard = {
-//     ...apiCard,
-//     likes_count: apiCard.likesCount,
-//     board_id: apiCard.boardId,
-//   };
-
-//   delete apiCard.likesCount;
-//   delete apiCard.boardId;
-
-//   return newCard;
-// };
-
 //onRemoveCardAPI
 const onRemoveCardAPI = (id) => {
   return axios
@@ -58,52 +44,12 @@ const onRemoveBoardAPI = (id) => {
   .delete(`${kbaseURL}/boards/${id}`);
 };
 
-
-//onLikeCardAPI
-//postCardAPI
-//getallboards
-
-
 //getcardsforboard
 const onLikeCardAPI = (id) => {
   return axios
   .patch(`${kbaseURL}/cards/${id}/like`)
   .then(response => response.data);
-}
-
-//postCardAPI -----Nadia
-// const addCardAPI = (newCard) => {
-//   return axios.post(`${kbaseURL}/cards`, newCard)
-//     .then(response => response.data);
-// };
-
-// //get all cards??
-// const getAllCardsAPI = () => {
-//   return axios.get(`${kbaseURL}/cards`)
-//   .then(response => response.data)
-//   .catch(error => console.error(error))
-// }
-
-//getcardsforboard
-//onlikechangelikecount
-//onLikeCardAPI
-
-//converttoapiboard
-//converttapiocard
-
-
-// const convertCardToAPI = (newCard) => {
-//   return {
-//     message: newCard.message,
-//     board_id: newCard.boardId,
-//   };
-// };
-
-//onhandlesubmitnewcard
-// const onHandleSubmitNewCard = (id) => {
-//   return axios
-//   .then 
-// }
+};
 
 const getCardsForBoardAPI = (boardId) => {
   return axios.get(`${kbaseURL}/boards/${boardId}/cards`)
@@ -116,14 +62,9 @@ function App() {
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [cards, setCards] = useState([]);
 
-
-  //setSelectedBoard
-  //selectedBoard
-
   const onSelectBoard = (boardId) => {
     const board = boards.find((board) => board.id === boardId);
     setSelectedBoard(board);
-
   };
 
   const getCardsForBoard = (boardId) => {
