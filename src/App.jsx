@@ -223,25 +223,36 @@ function App() {
       </header>
       <main>
         <div>
-          <BoardList
+          { !selectedBoard && 
+            <>
+            <BoardList 
             boards={boards}
             onSelectBoard={onSelectBoard}
             onDeleteBoard={onDeleteBoard}     
-            onDeleteCardsInBoard={onDeleteCardsInBoard} 
-          />
+            onDeleteCardsInBoard={onDeleteCardsInBoard} />
+            </>
+          }
+          { selectedBoard && 
+            <div>
+              <h2>Selected Board: {selectedBoard.title} by {selectedBoard.owner}</h2>
+              <button onClick={() => setSelectedBoard(null)}> back </button>
+            <div>
+            <CardList
+              cards={selectedBoard ? cards : []}
+              onDeleteCard={onDeleteCard}
+              onLikeCard={onLikeCard}
+            />
         </div>
-        <div>
-          <CardList
-            cards={selectedBoard ? cards : []}
-            onDeleteCard={onDeleteCard}
-            onLikeCard={onLikeCard}
-          />
+            </div>
+          }
         </div>
-        <div>
 
+        <div>
+          {! selectedBoard &&
           <NewBoardForm
             onHandleSubmit={onHandleSubmitBoard}
           />
+          }
         </div>
         {selectedBoard ? (
           <NewCardForm onHandleSubmit={onHandleSubmitCard} />
