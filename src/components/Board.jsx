@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import CardList from './CardList.jsx';
 
-const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard }) => {
+const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard,onDeleteCardsInBoard }) => {
 
     const handleClick = () => {
         onSelectBoard(id);
@@ -14,11 +14,17 @@ const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard }) => {
         console.log(`Board ${id} deleted`);
     };
 
+    const handleDeleteCards = () => {
+        onDeleteCardsInBoard(id);
+        console.log(`Cards ${id} deleted`);
+    }
+
     return (
     <div className="board" >
         <button onClick={() => {handleClick()}}>{title}</button>
         by {owner}
         <button onClick={() => {handleDelete(id)}}>delete Emoji</button>
+        <button onClick={handleDeleteCards}>delete ALL Emoji</button>
     </div>
     );
 };
@@ -35,6 +41,7 @@ Board.propTypes = {
     ).isRequired,
     onDeleteCard: PropTypes.func.isRequired,
     onLikeCard: PropTypes.func.isRequired,
+    onDeleteCardsInBoard: PropTypes.func.isRequired
 };
 
 export default Board;

@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Board from './Board.jsx';
 // import './BoardList.css';
 
-const BoardList = ({ boards, onSelectBoard, onDeleteBoard }) => {
+const BoardList = ({ boards, onSelectBoard, onDeleteBoard,onDeleteCardsInBoard }) => {
 
     const getBoardListJSX = (boards) => {
     return boards.map((board) => {
@@ -14,6 +14,7 @@ const BoardList = ({ boards, onSelectBoard, onDeleteBoard }) => {
                 title={board.title}
                 onSelectBoard={onSelectBoard}
                 onDeleteBoard={onDeleteBoard}
+                onDeleteCardsInBoard={onDeleteCardsInBoard} 
             />
             );
     });
@@ -28,16 +29,15 @@ const BoardList = ({ boards, onSelectBoard, onDeleteBoard }) => {
 
 BoardList.propTypes = {
     boards: PropTypes.arrayOf(
-    PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-    })
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            owner: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+        })
     ).isRequired,
-    selectedBoardId: PropTypes.number,
     onSelectBoard: PropTypes.func.isRequired,
-    onDeleteCard: PropTypes.func.isRequired,
-    onLikeCard: PropTypes.func.isRequired,
-    cardsByBoard: PropTypes.object.isRequired
+    onDeleteBoard: PropTypes.func.isRequired,
+    onDeleteCardsInBoard: PropTypes.func.isRequired,
 };
 
 export default BoardList;

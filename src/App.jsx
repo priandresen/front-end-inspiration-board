@@ -7,7 +7,7 @@ import NewCardForm from './components/NewCardForm.jsx'
 import './App.css'
 import CardList from './components/CardList';
 
-const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com/';
+const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com';
 // const kbaseURL = 'http://127.0.0.1:5000';
 
 
@@ -32,6 +32,9 @@ const convertCardFromAPI = (apiCard) => {
   return newCard;
 };
 
+
+
+
 //convertToAPI
 const convertCardToAPI = (apiCard) => {
   const newCard = {
@@ -45,6 +48,9 @@ const convertCardToAPI = (apiCard) => {
 
   return newCard;
 };
+
+
+
 
 //onRemoveCardAPI
 const onRemoveCardAPI = (id) => {
@@ -102,11 +108,8 @@ const onLikeCardAPI = (id) => {
 //   };
 // };
 
-//onhandlesubmitnewcard
-// const onHandleSubmitNewCard = (id) => {
-//   return axios
-//   .then 
-// }
+
+
 
 const getCardsForBoardAPI = (boardId) => {
   return axios.get(`${kbaseURL}/boards/${boardId}/cards`)
@@ -174,14 +177,27 @@ function App() {
       }
     });
   };
+
+  const onDeleteCardsInBoard = (boardId) => {
+    return axios
+    .delete(`${kbaseURL}/boards/${boardId}/cards`)
+    .then(() => {
+      setCards([]);
+    })
+    .catch((error) => console.error(error));
+
+  };
   
   const onHandleSubmitCard = (newCard) => {
-    return axios.post(`${kbaseURL}/boards/${selectedBoard.id}/cards/`, convertCardToAPI(newCard))
+    return axios.post(`${kbaseURL}/boards/${selectedBoard.id}/cards`, convertCardToAPI(newCard))
     .then((response) => {
       setCards((cards) => [...cards, convertCardFromAPI(response.data)]);
     })
     .catch((error) => console.error(error));
   };
+
+
+
   
   const onHandleSubmitBoard = (newBoard) => {
     return axios.post(`${kbaseURL}/boards`, newBoard)
@@ -215,7 +231,8 @@ function App() {
           <BoardList
             boards={boards}
             onSelectBoard={onSelectBoard}
-            onDeleteBoard={onDeleteBoard}     
+            onDeleteBoard={onDeleteBoard}   
+            onDeleteCardsInBoard={onDeleteCardsInBoard}   
           />
         </div>
         <div>
