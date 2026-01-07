@@ -29,15 +29,14 @@ const BoardList = ({ boards, onSelectBoard, onDeleteBoard,onDeleteCardsInBoard }
 
 BoardList.propTypes = {
     boards: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            owner: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-        })
+    PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        title: PropTypes.string.isRequired,
+        owner: PropTypes.string.isRequired,
+    })
     ).isRequired,
     onSelectBoard: PropTypes.func.isRequired,
     onDeleteBoard: PropTypes.func.isRequired,
-    onDeleteCardsInBoard: PropTypes.func.isRequired,
 };
 
 export default BoardList;

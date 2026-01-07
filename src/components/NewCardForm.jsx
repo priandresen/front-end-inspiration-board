@@ -4,20 +4,30 @@ const NewCardForm = ({ onHandleSubmit }) => {
     const [formFields, setFormFields] = useState({
         message: ""
     });
+    const [error, setError] = useState("");
+
 
     const handleMessageChange = (event) => {
         setFormFields({
             ...formFields,
             message: event.target.value,
         });
+        setError("");
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onHandleSubmit(formFields);
-        setFormFields({
-            message: "",
-        });
+        
+        return onHandleSubmit(formFields).then(() => {
+            setFormFields({
+                message: "",
+            });
+            setError("");
+        })
+        .catch((err) => {
+        const details = err?.response?.data?.details;
+        setError(details || "Could not create card.");
+      });
     };
 
 
@@ -26,9 +36,20 @@ const NewCardForm = ({ onHandleSubmit }) => {
             <h2>Create New Card</h2>
             <section>
                 <label htmlFor="cardMessage">Card Message:</label>
-                <input type="text" id="cardMessage" name="cardMessage" value={formFields.message} onChange={handleMessageChange} required />
+                <input 
+                    type="text" 
+                    id="cardMessage" 
+                    name="message" 
+                    value={formFields.message} 
+                    onChange={handleMessageChange} 
+                    required
+                    className={error ? "input-error" : ""} 
+                />
             </section>
-            <button type="submit" value="Add card">Create Card</button>
+            
+            {error && <p className="error-text">{error}</p>}
+
+            <button type="submit">Create Card</button>
         </form>
     );
 };
