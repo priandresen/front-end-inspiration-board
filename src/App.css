@@ -1,3 +1,22 @@
+@font-face {
+  font-family: 'cosmic-rockstar';
+  src: url('src/fonts/cosmic-rockstar.regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'magic-delight';
+  src: url('src/fonts/magic-delight-demo.regular.otf') format('opentype');
+}
+
+h1 {
+  font-family: 'cosmic-rockstar';
+  font-size: 8rem;
+  color: #ffe261;
+  text-shadow: 2px 2px #00000033;
+}
+
+
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
