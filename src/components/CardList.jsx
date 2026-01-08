@@ -18,15 +18,25 @@ const CardList = ({ cards, onDeleteCard, onLikeCard, onDeleteCardsInBoard, board
     });
   }
   
-	const handleDeleteCards = () => {
-	    onDeleteCardsInBoard(boardId); // id is the board id
-	    console.log(`All cards for board ${boardId} deleted`);
-	};
+	const handleDeleteCards = async () => {
+  try {
+    await onDeleteCardsInBoard(boardId);
+    console.log(`All cards for board ${boardId} deleted`);
+  } catch (e) {
+    console.error(e);
+  }
+};
 
     return (
     <div className="card-list">
       {getCardListJSX(cards)}
-		<button className='reset-button' onClick={handleDeleteCards}>reset board</button>
+		<button 
+      className='reset-button' 
+      onClick={handleDeleteCards}
+      disabled={cards.length === 0}
+      >
+        Remove all cards
+      </button>
     </div>
   );
 };

@@ -48,23 +48,9 @@ const handleSubmit = (event) => {
 		id={`input-${name}`} 
 		name={name}
 		value={formData[name]}
-		onChange={handleChange} required 
+		onChange={handleChange} 
     className={error ? "input-error" : ""}/>;
 	};
-
-//   const handleTitleChange = (event) => {
-//     setFormData({
-//       ...formData,
-//       title: event.target.value,
-//     });
-//   };
-
-//   const handleOwnerChange = (event) => {
-//     setFormData({
-//       ...formData,
-//       owner: event.target.value,
-//     });
-//   };
 
 return (
     <form onSubmit={handleSubmit} className="new-board-form">

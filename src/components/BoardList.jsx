@@ -4,13 +4,12 @@ import './BoardList.css';
 
 const BoardList = ({ boards, onSelectBoard, onDeleteBoard }) => {
 
-    const getBoardListJSX = (boards) => {
-    return boards.map((board) => {
+    const getBoardListJSX = (boardList) => {
+    return boardList.map((board) => {
         return (
             <Board
                 key={board.id}
                 id={board.id}
-                owner={board.owner}
                 title={board.title}
                 onSelectBoard={onSelectBoard}
                 onDeleteBoard={onDeleteBoard}

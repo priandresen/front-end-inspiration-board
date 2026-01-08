@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './Board.css';
 
-const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard }) => {
+const Board = ({ title, id, onSelectBoard, onDeleteBoard }) => {
 
     const handleClick = () => {
         onSelectBoard(id);
@@ -25,7 +25,6 @@ const Board = ({ title, id, owner, onSelectBoard, onDeleteBoard }) => {
 Board.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    owner: PropTypes.string.isRequired,
     onSelectBoard: PropTypes.func.isRequired,
     onDeleteBoard: PropTypes.func.isRequired,
 };
