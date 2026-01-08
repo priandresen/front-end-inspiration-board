@@ -19,17 +19,11 @@ const NewCardForm = ({ onHandleSubmit }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const payload = { message: formFields.message.trim() };
+    const payload = { message: formFields.message.trim() };
 
-        if (!payload.message) {
-            setError("Message is required.");
-                return;
-        }
-        
-        return onHandleSubmit(formFields).then(() => {
-            setFormFields({
-                message: "",
-            });
+    return onHandleSubmit(payload)
+        .then(() => {
+            setFormFields({ message: "" });
             setError("");
         })
         .catch((err) => {
@@ -50,7 +44,7 @@ const NewCardForm = ({ onHandleSubmit }) => {
                     id="cardMessage"
                     name="message"
                     value={formFields.message}
-                    onChange={handleMessageChange}
+                    onChange={handleMessageChange} required
                     className={error ? "input-error" : ""}
                 />
             </section>

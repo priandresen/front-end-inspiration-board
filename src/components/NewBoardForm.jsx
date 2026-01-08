@@ -27,11 +27,6 @@ const handleSubmit = (event) => {
       owner: formData.owner.trim(),
     };
 
-    if (!payload.title || !payload.owner) {
-      setError("Title and owner are required.");
-      return;
-    }
-
     return onHandleSubmit(payload)
       .then(() => {
         setFormData(kDefaultFormState);
@@ -48,7 +43,7 @@ const handleSubmit = (event) => {
 		id={`input-${name}`} 
 		name={name}
 		value={formData[name]}
-		onChange={handleChange} 
+		onChange={handleChange} required
     className={error ? "input-error" : ""}/>;
 	};
 
