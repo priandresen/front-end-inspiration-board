@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './NewCardForm.css';
 
 const NewCardForm = ({ onHandleSubmit }) => {
     const [formFields, setFormFields] = useState({

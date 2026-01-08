@@ -15,9 +15,8 @@ const Card = ({ id, likesCount, message, onDeleteCard, onLikeCard }) => {
     <div className="card">
       <p>{message}</p>
       <div>     
-          {likesCount}
-          <button onClick={likeButtonClicked}>✨</button>
-          <button onClick={deleteButtonClicked}>🗑</button>
+          <p>{likesCount} <button className='like-button' onClick={likeButtonClicked}>✨</button></p>
+          <button className='delete-button' onClick={deleteButtonClicked}>🗑</button>
       </div>
     </div>
   );

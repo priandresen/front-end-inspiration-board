@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './NewBoardForm.css';
 
 const kDefaultFormState = {
     title: "",

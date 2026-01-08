@@ -26,7 +26,7 @@ const CardList = ({ cards, onDeleteCard, onLikeCard, onDeleteCardsInBoard, board
     return (
     <div className="card-list">
       {getCardListJSX(cards)}
-		<button onClick={handleDeleteCards}>reset board</button>
+		<button className='reset-button' onClick={handleDeleteCards}>reset board</button>
     </div>
   );
 };

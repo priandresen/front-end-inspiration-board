@@ -64,6 +64,8 @@ function App() {
   const [boards, setBoards] = useState([]);
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [cards, setCards] = useState([]);
+  const [newBoard, setNewBoard] = useState(false);
+  const [newCard, setNewCard] = useState(false);
 
 
   const onSelectBoard = (boardId) => {
@@ -161,54 +163,156 @@ function App() {
     .catch((error) => console.error(error));
   };
 
+  const closeOverlays = () => {
+    if (newCard) setNewCard(false);
+    if (newBoard) setNewBoard(false);
+  };
+
+  const stopClick = (e) => e.stopPropagation();
+
+
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <h1>Inspiration Board</h1>
+//       </header>
+//       <main onClick={closeOverlays}>
+//         <div>
+//           { !selectedBoard && 
+//             <>
+//               <BoardList 
+//               boards={boards}
+//               onSelectBoard={onSelectBoard}
+//               onDeleteBoard={onDeleteBoard}     
+//             />
+//             </>
+//           }
+//           { selectedBoard && 
+//             <div>
+//               <h2> {selectedBoard.title} </h2>
+//               <p> by {selectedBoard.owner}</p>
+//               <button onClick={() => setSelectedBoard(null)}> back </button>
+//             <div>
+//             <CardList
+//               cards={selectedBoard ? cards : []}
+//               onDeleteCard={onDeleteCard}
+//               onLikeCard={onLikeCard}
+//               onDeleteCardsInBoard={onDeleteCardsInBoard}
+//               boardId={selectedBoard.id}
+//             />
+//         </div>
+//             </div>
+//           }
+//         </div>
+
+//         <div>
+//           {! selectedBoard && !newBoard 
+//           && (<button onClick={() => setNewBoard(true)}> + </button>)}
+//           { !selectedBoard && newBoard && (
+//           <NewBoardForm
+//             onHandleSubmit={onHandleSubmitBoard}
+//           />) 
+//           }
+//         </div>
+//       {selectedBoard && !newCard 
+//       && (<button onClick={() => setNewCard(true)}> + </button>)}
+//         {selectedBoard && newCard ? (
+//           <NewCardForm onHandleSubmit={onHandleSubmitCard} />
+//         ) : (
+//           <p>Select a board to add cards.</p>
+//         )}
+//       </main>
+//     </div>
+//   );
+// };
+
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header" onClick={closeOverlays}>
         <h1>Inspiration Board</h1>
       </header>
-      <main>
+
+      <main onClick={closeOverlays}>
         <div>
-          { !selectedBoard && 
+          {!selectedBoard && (
             <>
-              <BoardList 
-              boards={boards}
-              onSelectBoard={onSelectBoard}
-              onDeleteBoard={onDeleteBoard}     
-            />
+              <BoardList
+                boards={boards}
+                onSelectBoard={onSelectBoard}
+                onDeleteBoard={onDeleteBoard}
+              />
             </>
-          }
-          { selectedBoard && 
+          )}
+
+          {selectedBoard && (
             <div>
-              <h2>Selected Board: {selectedBoard.title} by {selectedBoard.owner}</h2>
-              <button onClick={() => setSelectedBoard(null)}> back </button>
-            <div>
-            <CardList
-              cards={selectedBoard ? cards : []}
-              onDeleteCard={onDeleteCard}
-              onLikeCard={onLikeCard}
-              onDeleteCardsInBoard={onDeleteCardsInBoard}
-              boardId={selectedBoard.id}
-            />
-        </div>
+              <h2>
+                Selected Board: {selectedBoard.title} by {selectedBoard.owner}
+              </h2>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedBoard(null);
+                  setNewCard(false);
+                }}
+              >
+                back
+              </button>
+
+              <div>
+                <CardList
+                  cards={selectedBoard ? cards : []}
+                  onDeleteCard={onDeleteCard}
+                  onLikeCard={onLikeCard}
+                  onDeleteCardsInBoard={onDeleteCardsInBoard}
+                  boardId={selectedBoard.id}
+                />
+              </div>
             </div>
-          }
+          )}
         </div>
 
         <div>
-          {! selectedBoard &&
-          <NewBoardForm
-            onHandleSubmit={onHandleSubmitBoard}
-          />
-          }
+          {!selectedBoard && !newBoard && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setNewBoard(true);
+              }}
+            >
+              +
+            </button>
+          )}
+
+          {!selectedBoard && newBoard && (
+            <div onClick={stopClick}>
+              <NewBoardForm onHandleSubmit={onHandleSubmitBoard} />
+            </div>
+          )}
         </div>
-        {selectedBoard ? (
-          <NewCardForm onHandleSubmit={onHandleSubmitCard} />
+
+        {selectedBoard && !newCard && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setNewCard(true);
+            }}
+          >
+            +
+          </button>
+        )}
+
+        {selectedBoard && newCard ? (
+          <div onClick={stopClick}>
+            <NewCardForm onHandleSubmit={onHandleSubmitCard} />
+          </div>
         ) : (
           <p>Select a board to add cards.</p>
         )}
       </main>
     </div>
   );
-};
+}
 
 export default App;
