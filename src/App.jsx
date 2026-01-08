@@ -5,6 +5,7 @@ import NewBoardForm from './components/NewBoardForm.jsx'
 import NewCardForm from './components/NewCardForm.jsx'
 import './App.css'
 import CardList from './components/CardList';
+import CardSort from './components/CardSort.jsx';
 
 
 const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com';
@@ -67,6 +68,7 @@ function App() {
   
   const [newBoard, setNewBoard] = useState(false);
   const [newCard, setNewCard] = useState(false);
+  const [orderedCards, setOrderedCards] = useState(false);
   
   const [cardSort, setCardSort] = useState("id");
 
@@ -185,6 +187,7 @@ function App() {
   const closeOverlays = () => {
     if (newCard) setNewCard(false);
     if (newBoard) setNewBoard(false);
+    if (orderedCards) setOrderedCards(false);
   };
 
   const stopClick = (e) => e.stopPropagation();
@@ -211,21 +214,38 @@ function App() {
           {selectedBoard && (
             <div>
               <h2>
-                Selected Board: {selectedBoard.title} by {selectedBoard.owner}
+                Current board: {selectedBoard.title} by {selectedBoard.owner}
               </h2>
 
-              <button
+              <button className="back-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedBoard(null);
                   setCards([]);
                   setNewCard(false);
+                  setOrderedCards(false);
                 }}
               >
                 Back
               </button>
 
-              <fieldset onClick={(e) => e.stopPropagation()}>
+              {selectedBoard && !orderedCards && (
+                <button className="order-button"
+                  onClick={(e) => {
+                  e.stopPropagation();
+                  setOrderedCards(true);
+              }}
+            >
+              '▼'
+            </button>
+          )}
+              {selectedBoard && orderedCards && (
+                <CardSort value={cardSort} onChange={setCardSort} />
+              )}
+
+
+
+              {/* <fieldset onClick={(e) => e.stopPropagation()}>
                 <legend>Sort cards</legend>
 
                 <label>
@@ -260,7 +280,7 @@ function App() {
                   />
                   Sort by +1s
                 </label>
-              </fieldset>
+              </fieldset> */}
               
               <CardList
                 cards={sortedCards}
