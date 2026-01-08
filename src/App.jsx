@@ -72,6 +72,11 @@ function App() {
   
   const [cardSort, setCardSort] = useState("id");
 
+  const isCreatingBoard = !selectedBoard && newBoard;
+  const isCreatingCard = selectedBoard && newCard;
+  const isCreating = isCreatingBoard || isCreatingCard;
+
+
   
   const getCardsForBoard = (boardId) => {
     return getCardsForBoardAPI(boardId)
@@ -190,6 +195,22 @@ function App() {
     if (orderedCards) setOrderedCards(false);
   };
 
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key !== "Escape") return;
+      setNewBoard(false);
+      setNewCard(false);
+      setOrderedCards(false);
+    };
+
+    const anyOverlayOpen = newBoard || newCard || orderedCards;
+    if (anyOverlayOpen) window.addEventListener("keydown", onKeyDown);
+
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [newBoard, newCard, orderedCards]);
+
+
+
   const stopClick = (e) => e.stopPropagation();
 
   return (
@@ -197,6 +218,12 @@ function App() {
       <header className="App-header" onClick={closeOverlays}>
         <h1>Inspiration Board</h1>
       </header>
+
+
+
+
+{/* 
+
 
       <main onClick={closeOverlays}>
         <div>
@@ -242,46 +269,6 @@ function App() {
               {selectedBoard && orderedCards && (
                 <CardSort value={cardSort} onChange={setCardSort} />
               )}
-
-
-
-              {/* <fieldset onClick={(e) => e.stopPropagation()}>
-                <legend>Sort cards</legend>
-
-                <label>
-                  <input
-                    type="radio"
-                    name="cardSort"
-                    value="id"
-                    checked={cardSort === "id"}
-                    onChange={(e) => setCardSort(e.target.value)}
-                  />
-                  Sort by ID
-                </label>
-
-                <label>
-                  <input
-                    type="radio"
-                    name="cardSort"
-                    value="alpha"
-                    checked={cardSort === "alpha"}
-                    onChange={(e) => setCardSort(e.target.value)}
-                  />
-                  Sort alphabetically
-                </label>
-
-                <label>
-                  <input
-                    type="radio"
-                    name="cardSort"
-                    value="likes"
-                    checked={cardSort === "likes"}
-                    onChange={(e) => setCardSort(e.target.value)}
-                  />
-                  Sort by +1s
-                </label>
-              </fieldset> */}
-              
               <CardList
                 cards={sortedCards}
                 onDeleteCard={onDeleteCard}
@@ -345,6 +332,132 @@ function App() {
           </div>
         )}
       </main>
+
+ */}
+
+<main onClick={closeOverlays}>
+  {isCreating ? (
+    <div
+      className="overlay"
+      onClick={() => {
+        setNewBoard(false);
+        setNewCard(false);
+      }}
+    >
+      <div className="overlay__panel" onClick={stopClick}>
+        {isCreatingBoard && (
+          <NewBoardForm onHandleSubmit={onHandleSubmitBoard} />
+        )}
+
+        {isCreatingCard && (
+          <NewCardForm onHandleSubmit={onHandleSubmitCard} />
+        )}
+      </div>
+    </div>
+  ) : (
+    <>
+      <div>
+        {!selectedBoard && (
+          <>
+            <BoardList
+              boards={boards}
+              onSelectBoard={onSelectBoard}
+              onDeleteBoard={onDeleteBoard}
+            />
+            <p>Select a board to view cards</p>
+          </>
+        )}
+
+        {selectedBoard && (
+          <div>
+            <h2>
+              Current board: {selectedBoard.title} by {selectedBoard.owner}
+            </h2>
+
+            <button
+              className="back-button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedBoard(null);
+                setCards([]);
+                setNewCard(false);
+                setOrderedCards(false);
+              }}
+            >
+              Back
+            </button>
+
+            {!orderedCards ? (
+              <button
+                className="order-button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setOrderedCards(true);
+                }}
+              >
+                ▼
+              </button>
+            ) : (
+              <CardSort value={cardSort} onChange={setCardSort} />
+            )}
+
+            <CardList
+              cards={sortedCards}
+              onDeleteCard={onDeleteCard}
+              onLikeCard={onLikeCard}
+            />
+          </div>
+        )}
+      </div>
+      <div>
+        {!selectedBoard && !newBoard && (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setNewBoard(true);
+            }}
+          >
+            +
+          </button>
+        )}
+      </div>
+
+      {selectedBoard && !newCard && (
+        <div className="fab-row" onClick={stopClick}>
+          <button
+            className="fab"
+            onClick={(e) => {
+              e.stopPropagation();
+              setNewCard(true);
+            }}
+            aria-label="Add card"
+          >
+            +
+          </button>
+
+          <button
+            className="fab"
+            disabled={cards.length === 0}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (!window.confirm("Remove all cards from this board?")) return;
+              onDeleteCardsInBoard(selectedBoard.id);
+            }}
+            aria-label="Remove all cards"
+            title="Remove all cards"
+          >
+            🧹
+          </button>
+        </div>
+      )}
+    </>
+  )}
+</main>
+
+
+
+
+
     </div>
   );
 }
