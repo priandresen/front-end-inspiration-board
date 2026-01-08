@@ -265,9 +265,7 @@ function App() {
               <CardList
                 cards={sortedCards}
                 onDeleteCard={onDeleteCard}
-                onLikeCard={onLikeCard}
-                boardId={selectedBoard.id}
-                onDeleteCardsInBoard={onDeleteCardsInBoard}  
+                onLikeCard={onLikeCard} 
               />
             </div> 
           )}
@@ -293,14 +291,32 @@ function App() {
         </div>
 
         {selectedBoard && !newCard && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setNewCard(true);
-            }}
-          >
-            +
-          </button>
+          <div className="fab-row" onClick={stopClick}>
+            <button
+              className="fab"
+              onClick={(e) => {
+                e.stopPropagation();
+                setNewCard(true);
+              }}
+              aria-label="Add card"
+            >
+              +
+            </button>
+
+            <button
+              className="fab"
+              disabled={cards.length === 0}
+              onClick={(e) => {
+                e.stopPropagation(); 
+                if (!window.confirm("Remove all cards from this board?")) return;
+                onDeleteCardsInBoard(selectedBoard.id);
+              }}
+              aria-label="Remove all cards"
+              title="Remove all cards"
+            >
+              🧹
+            </button>
+          </div>
         )}
 
         {selectedBoard && newCard && (
