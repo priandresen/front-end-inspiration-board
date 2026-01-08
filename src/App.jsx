@@ -54,9 +54,10 @@ const onLikeCardAPI = (id) => {
   .then(response => response.data);
 };
 
-const getCardsForBoardAPI = (boardId) => {
-  return axios.get(`${kbaseURL}/boards/${boardId}/cards`)
-  .then(response => response.data.cards)
+const getCardsForBoardAPI = (boardId, sort) => {
+  return axios
+    .get(`${kbaseURL}/boards/${boardId}/cards`, { params: { sort } })
+    .then(response => response.data.cards)
 };
 
 
@@ -66,6 +67,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [newBoard, setNewBoard] = useState(false);
   const [newCard, setNewCard] = useState(false);
+  const [cardSort, setCardSort] = useState("id");
 
 
   const onSelectBoard = (boardId) => {
@@ -73,8 +75,8 @@ function App() {
     setSelectedBoard(board);
   };
 
-  const getCardsForBoard = (boardId) => {
-    return getCardsForBoardAPI(boardId)
+  const getCardsForBoard = (boardId, sort) => {
+    return getCardsForBoardAPI(boardId, sort)
     .then((cardsFromAPI) => {
       const newCards = cardsFromAPI.map(convertCardFromAPI);
       setCards(newCards);
@@ -84,9 +86,9 @@ function App() {
 
   useEffect(() => {
     if (selectedBoard) {
-      getCardsForBoard(selectedBoard.id);
+      getCardsForBoard(selectedBoard.id, cardSort);
     }
-  }, [selectedBoard]);
+  }, [selectedBoard, cardSort]);
 
   const getAllBoards = () => {
     return getAllBoardsAPI()
@@ -241,6 +243,7 @@ function App() {
                 onSelectBoard={onSelectBoard}
                 onDeleteBoard={onDeleteBoard}
               />
+              <p>Select a board to view cards</p>
             </>
           )}
 
@@ -254,22 +257,57 @@ function App() {
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedBoard(null);
+                  setCards([]);
                   setNewCard(false);
                 }}
               >
-                back
+                Back
               </button>
 
-              <div>
-                <CardList
-                  cards={selectedBoard ? cards : []}
-                  onDeleteCard={onDeleteCard}
-                  onLikeCard={onLikeCard}
-                  onDeleteCardsInBoard={onDeleteCardsInBoard}
-                  boardId={selectedBoard.id}
-                />
-              </div>
-            </div>
+              <fieldset onClick={(e) => e.stopPropagation()}>
+                <legend>Sort cards</legend>
+
+                <label>
+                  <input
+                    type="radio"
+                    name="cardSort"
+                    value="id"
+                    checked={cardSort === "id"}
+                    onChange={(e) => setCardSort(e.target.value)}
+                  />
+                  Sort by ID
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    name="cardSort"
+                    value="alpha"
+                    checked={cardSort === "alpha"}
+                    onChange={(e) => setCardSort(e.target.value)}
+                  />
+                  Sort alphabetically
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    name="cardSort"
+                    value="likes"
+                    checked={cardSort === "likes"}
+                    onChange={(e) => setCardSort(e.target.value)}
+                  />
+                  Sort by +1s
+                </label>
+              </fieldset>
+              
+              <CardList
+                cards={cards}
+                onDeleteCard={onDeleteCard}
+                onLikeCard={onLikeCard}
+                onDeleteCardsInBoard={onDeleteCardsInBoard}
+              />
+            </div> 
           )}
         </div>
 
@@ -303,13 +341,12 @@ function App() {
           </button>
         )}
 
-        {selectedBoard && newCard ? (
+        {selectedBoard && newCard && (
           <div onClick={stopClick}>
             <NewCardForm onHandleSubmit={onHandleSubmitCard} />
           </div>
-        ) : (
-          <p>Select a board to add cards.</p>
         )}
+          {!selectedBoard && <p>Select a board to view cards.</p>}
       </main>
     </div>
   );
