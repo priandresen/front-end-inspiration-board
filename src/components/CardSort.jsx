@@ -13,7 +13,7 @@ const CardSort = ({ value, onChange }) => {
           onClick={(e) => e.stopPropagation()}
           onChange={(e) => onChange(e.target.value)}
         />
-        by id
+        By ID
       </label>
 
       <label>
@@ -25,7 +25,7 @@ const CardSort = ({ value, onChange }) => {
           onClick={(e) => e.stopPropagation()}
           onChange={(e) => onChange(e.target.value)}
         />
-        alphabetically
+        By Names
       </label>
 
       <label>
@@ -37,7 +37,7 @@ const CardSort = ({ value, onChange }) => {
           onClick={(e) => e.stopPropagation()}
           onChange={(e) => onChange(e.target.value)}
         />
-        by likes
+        By Likes
       </label>
     </fieldset>
   );

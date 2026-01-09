@@ -20,6 +20,7 @@
 
   min-height: 56px;
   line-height: 1;
+  font-size: 1.2rem;
 
   flex-wrap: wrap;   
   max-width: 100%; 
@@ -39,4 +40,5 @@
   margin: 0;               
   transform: scale(1.1);
   transform-origin: center;
+  color: black;
 }
