@@ -8,8 +8,8 @@ import CardList from './components/CardList';
 import CardSort from './components/CardSort.jsx';
 
 
-//const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com';
-const kbaseURL = 'http://127.0.0.1:5000';
+const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com';
+//const kbaseURL = 'http://127.0.0.1:5000';
 
 
 const getAllBoardsAPI = () => {
