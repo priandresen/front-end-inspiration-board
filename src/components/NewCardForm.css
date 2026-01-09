@@ -19,8 +19,10 @@
     font-size: 1.2rem
 }
 
-.newCardFormbutton {
+.newCardForm button {
     margin-top: 1rem; 
+    background-color: black;
+    color: #ccc;
 }
 
 .newCardForm {

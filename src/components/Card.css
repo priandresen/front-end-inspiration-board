@@ -1,6 +1,6 @@
 .card {
     display: grid;
-    background-color: yellow;
+    background: linear-gradient(to right, #024aad, #c56ae5); 
     grid-row: auto;
     border: 2px solid #00000033;
     border-radius: 12px;
@@ -13,7 +13,7 @@
 
 
 .like-button {
-    background-color: yellow;
+    background-color: white;
     border: none;
     border-radius: 8px;
     height: fit-content;
@@ -27,7 +27,7 @@
     transform: scale(1.05);
 }
 .delete-button {
-    background-color: yellow;
+    background-color: white;
     border: none;
     border-radius: 8px;
     height: fit-content;
@@ -41,3 +41,9 @@
     transform: scale(1.05);
 }
 
+.buttons-row {
+    display: grid;
+    grid-auto-flow: column; 
+    gap: 0.5rem;           
+    justify-content: center;  
+}
