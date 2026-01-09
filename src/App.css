@@ -14,8 +14,42 @@
 }
 
 body {
-  background-color: black;
+  background-color: rgb(0, 0, 0);
+  margin: 0
 }
+
+body:has(.App.theme--light) {
+  background-color: white;
+}
+
+.App {
+  --page-bg: #000000;
+  --header-bg: #000000;
+
+  --text: #ffffff;
+  --heading: #e7e7e7;
+
+  --shadow: rgba(0, 0, 0, 0.15);
+
+  --accent-gradient: linear-gradient(to right, #024aad, #c56ae5);
+
+  background-color: rgb(0, 0, 0);
+  min-height: 100vh;
+}
+
+.App.theme--light {
+  --page-bg: #19339b;
+  --header-bg: #ffffff;
+
+  --text: #111418;
+  --heading: #dd88ec;
+
+  --accent-gradient: linear-gradient(to right, #c0a2c6, #b963d6);
+  background-color: white;
+
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
 
 .App-header {
   position: fixed;
@@ -23,7 +57,7 @@ body {
   left: 0;
   right: 0;
   z-index: 999;
-  background-color: black;
+  background-color: var(--header-bg);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +73,7 @@ body {
 h1 {
   font-family: 'cosmic-rockstar';
   font-size: 8rem;
-  color: #e7e7e7;
+  color: var(--heading);
   text-shadow: 2px 2px #00000033;
   margin-bottom: 1rem; 
 }
@@ -48,7 +82,8 @@ h2 {
   text-transform: uppercase;
   text-decoration: underline;
   text-underline-offset: 10px; 
-  background: linear-gradient(to right, #024aad, #c56ae5); 
+  /* background: linear-gradient(to right, #024aad, #c56ae5);  */
+  background: var(--accent-gradient);
   padding: 1em; 
   border-radius: 14px;
 }
@@ -83,7 +118,9 @@ h2 {
   border-radius: 14px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+
+  /* box-shadow: 0 6px 16px rgba(0,0,0,0.15); */
+  box-shadow: 0 6px 16px var(--shadow);
   padding: 0 18px;
   font-size: 20px;
 }
@@ -100,7 +137,7 @@ h2 {
 }
 
 p {
-  color: white; 
+  color: var(--text);
   font-size: 20px; 
 }
 
@@ -111,7 +148,8 @@ p {
   gap: 12px;
   margin: 1rem 0 1.5rem;
   flex-wrap: wrap;
-  background : linear-gradient(to right, #024aad, #c56ae5);
+  /* background : linear-gradient(to right, #024aad, #c56ae5); */
+  background: var(--accent-gradient);
   border-radius: 12px;
   padding: 1rem;
   /* border-color: white; */
@@ -121,3 +159,17 @@ p {
   margin: 0;
 }
 
+
+.theme-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 6px 8px;
+  border-radius: 10px;
+  color: var(--text);
+}

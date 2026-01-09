@@ -7,7 +7,6 @@ import './App.css'
 import CardList from './components/CardList';
 import CardSort from './components/CardSort.jsx';
 
-
 const kbaseURL = 'https://back-end-inspiration-board-c6cv.onrender.com';
 //const kbaseURL = 'http://127.0.0.1:5000';
 
@@ -72,9 +71,17 @@ function App() {
   
   const [cardSort, setCardSort] = useState("id");
 
+  const[theme, setTheme] = useState("dark");
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+  };
+
+
   const isCreatingBoard = !selectedBoard && newBoard;
   const isCreatingCard = selectedBoard && newCard;
   const isCreating = isCreatingBoard || isCreatingCard;
+
+
 
 
   
@@ -211,10 +218,24 @@ function App() {
   const stopClick = (e) => e.stopPropagation();
 
 
+
+
   return (
-  <div className="App">
-    <header className="App-header" onClick={closeOverlays}>
+  <div className={`App theme--${theme}`}>
+    <header className={"App-header"} onClick={closeOverlays}>
       <h1>Inspiration Boards!</h1>
+
+      <button
+        className="theme-toggle"
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleTheme();
+        }}
+        aria-label="Toggle light mode"
+        title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+      >
+        {theme === "dark" ? "🌞" : "🌙"}
+      </button>
     </header>
 
     <main onClick={closeOverlays}>
