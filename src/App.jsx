@@ -214,7 +214,7 @@ function App() {
   return (
   <div className="App">
     <header className="App-header" onClick={closeOverlays}>
-      <h1>Inspiration Board</h1>
+      <h1>Inspiration Board!</h1>
     </header>
 
     <main onClick={closeOverlays}>
