@@ -214,7 +214,7 @@ function App() {
   return (
   <div className="App">
     <header className="App-header" onClick={closeOverlays}>
-      <h1>Inspiration Board!</h1>
+      <h1>Inspiration Boards!</h1>
     </header>
 
     <main onClick={closeOverlays}>
@@ -240,23 +240,25 @@ function App() {
           <div>
             {!selectedBoard && (
               <>
+                <div className="board-toolbar">
+                  <p>✨Select a board to view cards✨ </p>
+                  <button
+                    className="action-btn action-btn--icon"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setNewBoard(true);
+                    }}
+                    aria-label="Add board"
+                    title="Add board"
+                  >
+                    +
+                  </button>
+                </div>
                 <BoardList
                   boards={boards}
                   onSelectBoard={onSelectBoard}
                   onDeleteBoard={onDeleteBoard}
                 />
-                <p>✨Select a board to view cards✨</p>
-                <button
-                  className="action-btn action-btn--icon"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setNewBoard(true);
-                  }}
-                  aria-label="Add board"
-                  title="Add board"
-                >
-                  +
-                </button>
               </>
             )}
 
