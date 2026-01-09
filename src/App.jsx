@@ -245,7 +245,7 @@ function App() {
                   onSelectBoard={onSelectBoard}
                   onDeleteBoard={onDeleteBoard}
                 />
-                <p>Select a board to view cards</p>
+                <p>✨Select a board to view cards✨</p>
                 <button
                   className="action-btn action-btn--icon"
                   onClick={(e) => {
