@@ -13,6 +13,9 @@
   src: url('./fonts/cosmic-rockstar.regular.woff') format('woff2');  
 }
 
+body {
+  background-color: black;
+}
 
 h1 {
   font-family: 'cosmic-rockstar';
