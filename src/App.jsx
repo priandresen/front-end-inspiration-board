@@ -199,6 +199,7 @@ function App() {
   const closeOverlays = () => {
     if (newCard) setNewCard(false);
     if (newBoard) setNewBoard(false);
+    console.log('here');
   };
 
   useEffect(() => {
@@ -221,8 +222,8 @@ function App() {
 
 
   return (
-  <div className={`App theme--${theme}`}>
-    <header className={"App-header"} onClick={closeOverlays}>
+  <div className={`App theme--${theme}`}  onClick={closeOverlays}>
+    <header className={"App-header"}>
       <h1>Inspiration Boards!</h1>
 
       <button
@@ -238,7 +239,7 @@ function App() {
       </button>
     </header>
 
-    <main onClick={closeOverlays}>
+    <main>
       {isCreating ? (
         <div
           className="overlay"
