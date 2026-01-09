@@ -23,7 +23,7 @@
     transition: background-color 0.3s, transform 0.1s;
 }
 .like-button:hover {
-    background-color: #fdeb9d;
+    background-color: #686766;
     transform: scale(1.05);
 }
 .delete-button {
@@ -37,7 +37,7 @@
     transition: background-color 0.3s, transform 0.1s;
 }
 .delete-button:hover {
-    background-color: yellow;
+    background-color: #686766;
     transform: scale(1.05);
 }
 
