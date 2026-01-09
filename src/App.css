@@ -19,6 +19,16 @@ h1 {
   font-size: 8rem;
   color: #ffe261;
   text-shadow: 2px 2px #00000033;
+  margin-bottom: 1rem; 
+}
+
+h2 {
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 10px; 
+  background: linear-gradient(to right, #024aad, #c56ae5); 
+  padding: 1em; 
+  border-radius: 14px;
 }
 
 
