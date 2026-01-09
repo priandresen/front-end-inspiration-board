@@ -365,6 +365,17 @@ function App() {
                   onDeleteBoard={onDeleteBoard}
                 />
                 <p>Select a board to view cards</p>
+                <button
+                  className="action-btn action-btn--icon"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setNewBoard(true);
+                  }}
+                  aria-label="Add board"
+                  title="Add board"
+                >
+                  +
+                </button>
               </>
             )}
 
