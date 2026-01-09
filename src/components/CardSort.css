@@ -42,3 +42,7 @@
   transform-origin: center;
   color: black;
 }
+
+label {
+  color: black;
+}

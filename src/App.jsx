@@ -263,7 +263,7 @@ function App() {
             {selectedBoard && (
               <div>
                 <h2>
-                  Current board: {selectedBoard.title} by {selectedBoard.owner}
+                  {selectedBoard.title} - by {selectedBoard.owner}
                 </h2>
 
                 <div className="board-actions" onClick={stopClick}>
