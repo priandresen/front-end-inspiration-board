@@ -53,6 +53,7 @@ h2 {
   align-items: center;
   gap: 12px;
   margin: 16px 0 24px;
+  flex-wrap: wrap;
 }
 
 .action-btn {

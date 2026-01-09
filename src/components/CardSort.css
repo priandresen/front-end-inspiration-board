@@ -20,6 +20,10 @@
 
   min-height: 56px;
   line-height: 1;
+
+  flex-wrap: wrap;   
+  max-width: 100%; 
+  width: 100%;
 }
 
 .card-sort label {
