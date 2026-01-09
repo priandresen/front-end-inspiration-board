@@ -42,8 +42,24 @@
 }
 
 .buttons-row {
-    display: grid;
-    grid-auto-flow: column; 
-    gap: 0.5rem;           
-    justify-content: center;  
+  display: flex;
+  align-items: center;
+  gap: 1rem;         
+  justify-content: center;
+}
+
+
+.like-count {
+  font-size: 1rem;   
+  font-weight: bold;
+  color: #ff5722;   
+}
+
+.like-group {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;      
+  background-color: white;
+  border-radius: 8px;
+  padding: 0 1rem; 
 }

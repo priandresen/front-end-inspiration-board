@@ -1,11 +1,12 @@
 .card-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
     gap: 1rem;
+    width: 100%;         
+    justify-items: center; 
 }
 
-.reset-button {
+/* .reset-button {
     position: relative;
     bottom:10px;
     left: 120px;
@@ -22,4 +23,10 @@
 .reset-button:hover {
     background-color: #fdeb9d;
     transform: scale(1.05);
+} */
+
+@media (max-width: 800px) {
+    .card-list {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
 }
