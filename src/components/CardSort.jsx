@@ -3,14 +3,14 @@ import './CardSort.css';
 
 const CardSort = ({ value, onChange }) => {
   return (
-    <fieldset className="card-sort" onClick={(e) => e.stopPropagation()}>
-      
+    <fieldset className="card-sort">
       <label>
         <input
           type="radio"
           name="cardSort"
           value="id"
           checked={value === "id"}
+          onClick={(e) => e.stopPropagation()}
           onChange={(e) => onChange(e.target.value)}
         />
         by id
@@ -22,6 +22,7 @@ const CardSort = ({ value, onChange }) => {
           name="cardSort"
           value="alpha"
           checked={value === "alpha"}
+          onClick={(e) => e.stopPropagation()}
           onChange={(e) => onChange(e.target.value)}
         />
         alphabetically
@@ -33,6 +34,7 @@ const CardSort = ({ value, onChange }) => {
           name="cardSort"
           value="likes"
           checked={value === "likes"}
+          onClick={(e) => e.stopPropagation()}
           onChange={(e) => onChange(e.target.value)}
         />
         by likes
