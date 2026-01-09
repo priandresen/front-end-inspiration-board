@@ -12,15 +12,37 @@ const Card = ({ id, likesCount, message, onDeleteCard, onLikeCard }) => {
   };
 
   return (
-    <div className="card">
-      <h3>{message}</h3>
-      <div>     
-          <p>{likesCount} <button className='like-button' onClick={likeButtonClicked}>✨</button></p>
-          <button className='delete-button' onClick={deleteButtonClicked}>🗑</button>
-      </div>
+  <div className="card">
+    <h3>{message}</h3>
+
+    <div className="buttons-row">
+    <div className="like-group">
+        <span className="like-count">{likesCount}</span>
+        <button
+          className="like-button"
+          onClick={(e) => {
+            e.stopPropagation();
+            likeButtonClicked();
+          }}
+        >
+          ✨
+        </button>
+        </div>
+
+
+      <button
+        className="delete-button"
+        onClick={(e) => {
+          e.stopPropagation();
+          deleteButtonClicked();
+        }}
+      >
+        🗑
+      </button>
     </div>
-  );
-};
+  </div>
+);
+}
 
 Card.propTypes = {
   id: PropTypes.number.isRequired,

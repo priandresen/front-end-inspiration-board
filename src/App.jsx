@@ -192,7 +192,6 @@ function App() {
   const closeOverlays = () => {
     if (newCard) setNewCard(false);
     if (newBoard) setNewBoard(false);
-    if (orderedCards) setOrderedCards(false);
   };
 
   useEffect(() => {
@@ -209,131 +208,13 @@ function App() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [newBoard, newCard, orderedCards]);
 
-
-
   const stopClick = (e) => e.stopPropagation();
 
-  
 
-
-
-
-{/* 
-
-
-      <main onClick={closeOverlays}>
-        <div>
-          {!selectedBoard && (
-            <>
-              <BoardList
-                boards={boards}
-                onSelectBoard={onSelectBoard}
-                onDeleteBoard={onDeleteBoard}
-              />
-              <p>Select a board to view cards</p>
-            </>
-          )}
-
-          {selectedBoard && (
-            <div>
-              <h2>
-                Current board: {selectedBoard.title} by {selectedBoard.owner}
-              </h2>
-
-              <button className="back-button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedBoard(null);
-                  setCards([]);
-                  setNewCard(false);
-                  setOrderedCards(false);
-                }}
-              >
-                Back
-              </button>
-
-              {selectedBoard && !orderedCards && (
-                <button className="order-button"
-                  onClick={(e) => {
-                  e.stopPropagation();
-                  setOrderedCards(true);
-              }}
-            >
-              '▼'
-            </button>
-          )}
-              {selectedBoard && orderedCards && (
-                <CardSort value={cardSort} onChange={setCardSort} />
-              )}
-              <CardList
-                cards={sortedCards}
-                onDeleteCard={onDeleteCard}
-                onLikeCard={onLikeCard} 
-              />
-            </div> 
-          )}
-        </div>
-
-        <div>
-          {!selectedBoard && !newBoard && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setNewBoard(true);
-              }}
-            >
-              +
-            </button>
-          )}
-
-          {!selectedBoard && newBoard && (
-            <div onClick={stopClick}>
-              <NewBoardForm onHandleSubmit={onHandleSubmitBoard} />
-            </div>
-          )}
-        </div>
-
-        {selectedBoard && !newCard && (
-          <div className="fab-row" onClick={stopClick}>
-            <button
-              className="fab"
-              onClick={(e) => {
-                e.stopPropagation();
-                setNewCard(true);
-              }}
-              aria-label="Add card"
-            >
-              +
-            </button>
-
-            <button
-              className="fab"
-              disabled={cards.length === 0}
-              onClick={(e) => {
-                e.stopPropagation(); 
-                if (!window.confirm("Remove all cards from this board?")) return;
-                onDeleteCardsInBoard(selectedBoard.id);
-              }}
-              aria-label="Remove all cards"
-              title="Remove all cards"
-            >
-              🧹
-            </button>
-          </div>
-        )}
-
-        {selectedBoard && newCard && (
-          <div onClick={stopClick}>
-            <NewCardForm onHandleSubmit={onHandleSubmitCard} />
-          </div>
-        )}
-      </main>
-
- */}
   return (
   <div className="App">
     <header className="App-header" onClick={closeOverlays}>
-      <h1>Inspiration Board</h1>
+      <h1>Inspiration Boards!</h1>
     </header>
 
     <main onClick={closeOverlays}>
@@ -359,30 +240,32 @@ function App() {
           <div>
             {!selectedBoard && (
               <>
+                <div className="board-toolbar">
+                  <p>✨Select a board to view cards✨ </p>
+                  <button
+                    className="action-btn action-btn--icon"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setNewBoard(true);
+                    }}
+                    aria-label="Add board"
+                    title="Add board"
+                  >
+                    +
+                  </button>
+                </div>
                 <BoardList
                   boards={boards}
                   onSelectBoard={onSelectBoard}
                   onDeleteBoard={onDeleteBoard}
                 />
-                <p>Select a board to view cards</p>
-                <button
-                  className="action-btn action-btn--icon"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setNewBoard(true);
-                  }}
-                  aria-label="Add board"
-                  title="Add board"
-                >
-                  +
-                </button>
               </>
             )}
 
             {selectedBoard && (
               <div>
                 <h2>
-                  Current board: {selectedBoard.title} by {selectedBoard.owner}
+                  {selectedBoard.title} - by {selectedBoard.owner}
                 </h2>
 
                 <div className="board-actions" onClick={stopClick}>
@@ -410,7 +293,14 @@ function App() {
                       Sort
                     </button>
                   ) : (
-                    <CardSort value={cardSort} onChange={setCardSort} />
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setOrderedCards(false);
+                      }}
+                    >
+                      <CardSort value={cardSort} onChange={setCardSort} />
+                    </div>
                   )}
 
                   {!newCard && (

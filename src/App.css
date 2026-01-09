@@ -13,19 +13,51 @@
   src: url('./fonts/cosmic-rockstar.regular.woff') format('woff2');  
 }
 
+body {
+  background-color: black;
+}
+
+.App-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.App-header h1 {
+  /* font-family: 'magic-delight'; */
+  font-size: 8rem;
+  margin: 0;
+}
 
 h1 {
   font-family: 'cosmic-rockstar';
   font-size: 8rem;
-  color: #ffe261;
+  color: #e7e7e7;
   text-shadow: 2px 2px #00000033;
+  margin-bottom: 1rem; 
+}
+
+h2 {
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 10px; 
+  background: linear-gradient(to right, #024aad, #c56ae5); 
+  padding: 1em; 
+  border-radius: 14px;
 }
 
 
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 13rem 1rem 1rem;
   text-align: center;
 } 
 
@@ -43,6 +75,7 @@ h1 {
   align-items: center;
   gap: 12px;
   margin: 16px 0 24px;
+  flex-wrap: wrap;
 }
 
 .action-btn {
@@ -65,3 +98,26 @@ h1 {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+p {
+  color: white; 
+  font-size: 20px; 
+}
+
+.board-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 1rem 0 1.5rem;
+  flex-wrap: wrap;
+  background : linear-gradient(to right, #024aad, #c56ae5);
+  border-radius: 12px;
+  padding: 1rem;
+  /* border-color: white; */
+}
+
+.board-toolbar p {
+  margin: 0;
+}
+

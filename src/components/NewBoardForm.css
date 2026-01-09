@@ -1,5 +1,7 @@
 .new-board-form section {
     margin-bottom: 1rem; 
+    color: white; 
+    
 }
 
 .new-board-form label {
@@ -15,12 +17,14 @@
 
 .new-board-form button {
     margin-top: 1rem; 
+    background: black;
+    color: white; 
 }
 
 .new-board-form {
-    border: 1px solid #ccc; 
     padding: 1rem;            
     margin-bottom: 1rem;      
     border-radius: 20px;      
     box-shadow: #00000033 2px 2px 10px;
+    background: linear-gradient(to right, #024aad, #c56ae5); 
 }
