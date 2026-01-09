@@ -3,9 +3,8 @@ import './CardSort.css';
 
 const CardSort = ({ value, onChange }) => {
   return (
-    <fieldset onClick={(e) => e.stopPropagation()}>
-      <legend>Sort cards</legend>
-
+    <fieldset className="card-sort" onClick={(e) => e.stopPropagation()}>
+      
       <label>
         <input
           type="radio"

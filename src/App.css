@@ -37,35 +37,31 @@ h1 {
   color: #888;
 }
 
-.fab-row {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
+.board-actions {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 12px;
-  z-index: 1000;
+  margin: 16px 0 24px;
 }
 
-.fab {
-  width: 56px;
+.action-btn {
   height: 56px;
   border-radius: 14px;
-  font-size: 32px;
   border: none;
   cursor: pointer;
   box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  padding: 0 18px;
+  font-size: 20px;
 }
 
-.fab:disabled {
+.action-btn--icon {
+  width: 56px;
+  padding: 0;
+  font-size: 28px;
+}
+
+.action-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-
-/* .overlay {
-
-}
-
-.overlay__panel {
-
-} */
