@@ -1,6 +1,6 @@
 
 .newCardForm {
-    background: linear-gradient(to right, #024aad, #c56ae5); 
+    background: var(--tile-bg);
 }
 
 .newCardForm section {
@@ -21,8 +21,8 @@
 
 .newCardForm button {
     margin-top: 1rem; 
-    background-color: black;
-    color: #ccc;
+    background-color: var(--button);
+    color: var(--button-text);
 }
 
 .newCardForm {

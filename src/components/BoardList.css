@@ -22,7 +22,7 @@
     width: fit-content + 5px;
     box-shadow: #00000033 2px 2px 10px;
     height: fit-content;
-    background: linear-gradient(to right, #024aad, #c56ae5); 
+    background: var(--tile-bg);
 
 }
 

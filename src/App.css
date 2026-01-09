@@ -32,9 +32,12 @@ body:has(.App.theme--light) {
   --shadow: rgba(0, 0, 0, 0.15);
 
   --accent-gradient: linear-gradient(to right, #024aad, #c56ae5);
+  --tile-bg: linear-gradient(to right, #024aad, #c56ae5);
 
   background-color: rgb(0, 0, 0);
   min-height: 100vh;
+  --button: black;
+  --button-text: #ffffff;
 }
 
 .App.theme--light {
@@ -44,8 +47,11 @@ body:has(.App.theme--light) {
   --text: #111418;
   --heading: #dd88ec;
 
-  --accent-gradient: linear-gradient(to right, #c0a2c6, #b963d6);
+  --accent-gradient: linear-gradient(to right,  #e9efd0, #d89beb);
+  --tile-bg: linear-gradient(to bottom, #e9efd0, #d89beb);
   background-color: white;
+  --button: white;
+  --button-text: #000000;
 
   --shadow: rgba(0, 0, 0, 0.1);
 }

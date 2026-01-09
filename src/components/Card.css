@@ -1,6 +1,8 @@
+
 .card {
     display: grid;
     background: linear-gradient(to right, #024aad, #c56ae5); 
+    background: var(--tile-bg);
     grid-row: auto;
     border-radius: 12px;
     box-shadow: 2px 2px 10px #00000033;
